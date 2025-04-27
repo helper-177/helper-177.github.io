@@ -3,15 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Помощь на дорогах | Москва и область</title>
-    <link rel="stylesheet" href="CSS/style.css">
+    <title>Экстренная авто помощь | Москва и область</title>
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>🚗 Помощь на дорогах</h1>
-            <p>Круглосуточная помощь автомобилистам в Москве и области</p>
+            <div class="logo-header">
+                <i class="fas fa-car-crash logo-icon"></i>
+                <h1>AutoHelper<span>24</span></h1>
+                <p>Экстренная помощь на дорогах</p>
+            </div>
+            <div class="header-contacts">
+                <a href="https://t.me/Rus69alex" class="contact-link" target="_blank">
+                    <i class="fab fa-telegram"></i>
+                </a>
+                <a href="https://wa.me/79290957455" class="contact-link" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
         </div>
     </header>
 
@@ -19,121 +30,185 @@
         <div class="services-grid">
             <!-- Прикурить автомобиль -->
             <div class="service-card">
-                <img src="images/jumpstart.jpg" alt="Прикурить автомобиль">
-                <h3>Прикурить автомобиль</h3>
-                <p>Срочный запуск двигателя при разряженном аккумуляторе</p>
-                <div class="buttons">
-                    <a href="tg://resolve?domain=your_telegram" class="btn telegram">
-                        <i class="fab fa-telegram"></i> Telegram
-                    </a>
-                    <a href="https://wa.me/79991234567" class="btn whatsapp">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </a>
+                <div class="service-icon jumpstart">
+                    <i class="fas fa-car-battery"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Прикурить автомобиль</h3>
+                    <ul class="service-features">
+                        <li><i class="fas fa-clock"></i> Время прибытия: 25-40 мин</li>
+                        <li><i class="fas fa-ruble-sign"></i> Стоимость: от 1500₽</li>
+                        <li><i class="fas fa-check-circle"></i> Гарантия успешного запуска</li>
+                    </ul>
+                    <div class="service-buttons">
+                        <a href="https://t.me/Rus69alex" class="btn telegram" target="_blank">
+                            <i class="fab fa-telegram"></i> Заказать
+                        </a>
+                        <a href="https://wa.me/79290957455" class="btn whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Уточнить
+                        </a>
+                    </div>
                 </div>
             </div>
 
             <!-- Подвезти топливо -->
             <div class="service-card">
-                <img src="images/fuel.jpg" alt="Доставка топлива">
-                <h3>Подвезти топливо</h3>
-                <p>Экспресс-доставка бензина или дизельного топлива</p>
-                <div class="buttons">
-                    <a href="tg://resolve?domain=your_telegram" class="btn telegram">
-                        <i class="fab fa-telegram"></i> Telegram
-                    </a>
-                    <a href="https://wa.me/79991234567" class="btn whatsapp">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </a>
+                <div class="service-icon fuel">
+                    <i class="fas fa-gas-pump"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Доставка топлива</h3>
+                    <ul class="service-features">
+                        <li><i class="fas fa-clock"></i> Время прибытия: 30-50 мин</li>
+                        <li><i class="fas fa-ruble-sign"></i> АИ-95: 65₽/литр + доставка</li>
+                        <li><i class="fas fa-check-circle"></i> Любой объем от 5 литров</li>
+                    </ul>
+                    <div class="service-buttons">
+                        <a href="https://t.me/Rus69alex" class="btn telegram" target="_blank">
+                            <i class="fab fa-telegram"></i> Заказать
+                        </a>
+                        <a href="https://wa.me/79290957455" class="btn whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Уточнить
+                        </a>
+                    </div>
                 </div>
             </div>
 
             <!-- Отбуксировать до сервиса -->
             <div class="service-card">
-                <img src="images/tow.jpg" alt="Буксировка автомобиля">
-                <h3>Отбуксировать до сервиса</h3>
-                <p>Аккуратная буксировка легковых автомобилей и внедорожников</p>
-                <div class="buttons">
-                    <a href="tg://resolve?domain=your_telegram" class="btn telegram">
-                        <i class="fab fa-telegram"></i> Telegram
-                    </a>
-                    <a href="https://wa.me/79991234567" class="btn whatsapp">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </a>
+                <div class="service-icon tow">
+                    <i class="fas fa-trailer"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Буксировка авто</h3>
+                    <ul class="service-features">
+                        <li><i class="fas fa-clock"></i> Грузоподъемность до 3.5 тонн</li>
+                        <li><i class="fas fa-ruble-sign"></i> Стоимость: от 2000₽/час</li>
+                        <li><i class="fas fa-check-circle"></i> Аккуратная транспортировка</li>
+                    </ul>
+                    <div class="service-buttons">
+                        <a href="https://t.me/Rus69alex" class="btn telegram" target="_blank">
+                            <i class="fab fa-telegram"></i> Заказать
+                        </a>
+                        <a href="https://wa.me/79290957455" class="btn whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Уточнить
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <!-- Выезд компьютерной диагностики -->
+            <!-- Выезд диагностики -->
             <div class="service-card">
-                <img src="images/diagnostic.jpg" alt="Компьютерная диагностика">
-                <h3>Выезд диагностики</h3>
-                <p>Компьютерная диагностика электронных систем автомобиля</p>
-                <div class="buttons">
-                    <a href="tg://resolve?domain=your_telegram" class="btn telegram">
-                        <i class="fab fa-telegram"></i> Telegram
-                    </a>
-                    <a href="https://wa.me/79991234567" class="btn whatsapp">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </a>
+                <div class="service-icon diagnostic">
+                    <i class="fas fa-laptop-medical"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Компьютерная диагностика</h3>
+                    <ul class="service-features">
+                        <li><i class="fas fa-clock"></i> Полная проверка систем</li>
+                        <li><i class="fas fa-ruble-sign"></i> Стоимость: от 2500₽</li>
+                        <li><i class="fas fa-check-circle"></i> Современное оборудование</li>
+                    </ul>
+                    <div class="service-buttons">
+                        <a href="https://t.me/Rus69alex" class="btn telegram" target="_blank">
+                            <i class="fab fa-telegram"></i> Заказать
+                        </a>
+                        <a href="https://wa.me/79290957455" class="btn whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Уточнить
+                        </a>
+                    </div>
                 </div>
             </div>
 
             <!-- Прошивка брелков -->
             <div class="service-card">
-                <img src="images/key.jpg" alt="Прошивка ключей">
-                <h3>Прошивка брелков</h3>
-                <p>Программирование ключей и брелоков сигнализаций</p>
-                <div class="buttons">
-                    <a href="tg://resolve?domain=your_telegram" class="btn telegram">
-                        <i class="fab fa-telegram"></i> Telegram
-                    </a>
-                    <a href="https://wa.me/79991234567" class="btn whatsapp">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </a>
+                <div class="service-icon key">
+                    <i class="fas fa-key"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Прошивка ключей</h3>
+                    <ul class="service-features">
+                        <li><i class="fas fa-clock"></i> Работаем со всеми марками</li>
+                        <li><i class="fas fa-ruble-sign"></i> Стоимость: от 3500₽</li>
+                        <li><i class="fas fa-check-circle"></i> Восстановление чипов</li>
+                    </ul>
+                    <div class="service-buttons">
+                        <a href="https://t.me/Rus69alex" class="btn telegram" target="_blank">
+                            <i class="fab fa-telegram"></i> Заказать
+                        </a>
+                        <a href="https://wa.me/79290957455" class="btn whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Уточнить
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <!-- Вскрытие автомобиля -->
+            <!-- Вскрытие авто -->
             <div class="service-card">
-                <img src="images/unlock.jpg" alt="Вскрытие автомобиля">
-                <h3>Вскрытие автомобиля</h3>
-                <p>Аккуратное вскрытие без повреждений при утере ключей</p>
-                <div class="buttons">
-                    <a href="tg://resolve?domain=your_telegram" class="btn telegram">
-                        <i class="fab fa-telegram"></i> Telegram
-                    </a>
-                    <a href="https://wa.me/79991234567" class="btn whatsapp">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </a>
+                <div class="service-icon unlock">
+                    <i class="fas fa-lock-open"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Аварийное вскрытие</h3>
+                    <ul class="service-features">
+                        <li><i class="fas fa-clock"></i> Без повреждений</li>
+                        <li><i class="fas fa-ruble-sign"></i> Стоимость: от 1800₽</li>
+                        <li><i class="fas fa-check-circle"></i> Все типы замков</li>
+                    </ul>
+                    <div class="service-buttons">
+                        <a href="https://t.me/Rus69alex" class="btn telegram" target="_blank">
+                            <i class="fab fa-telegram"></i> Заказать
+                        </a>
+                        <a href="https://wa.me/79290957455" class="btn whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Уточнить
+                        </a>
+                    </div>
                 </div>
             </div>
 
             <!-- Заправка кондиционера -->
             <div class="service-card">
-                <img src="images/ac.jpg" alt="Заправка кондиционера">
-                <h3>Заправка кондиционера</h3>
-                <p>Профессиональная заправка и диагностика системы</p>
-                <div class="buttons">
-                    <a href="tg://resolve?domain=your_telegram" class="btn telegram">
-                        <i class="fab fa-telegram"></i> Telegram
-                    </a>
-                    <a href="https://wa.me/79991234567" class="btn whatsapp">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </a>
+                <div class="service-icon ac">
+                    <i class="fas fa-snowflake"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Заправка кондиционера</h3>
+                    <ul class="service-features">
+                        <li><i class="fas fa-clock"></i> Проверка системы</li>
+                        <li><i class="fas fa-ruble-sign"></i> Стоимость: от 2200₽</li>
+                        <li><i class="fas fa-check-circle"></i> Экологичные хладагенты</li>
+                    </ul>
+                    <div class="service-buttons">
+                        <a href="https://t.me/Rus69alex" class="btn telegram" target="_blank">
+                            <i class="fab fa-telegram"></i> Заказать
+                        </a>
+                        <a href="https://wa.me/79290957455" class="btn whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Уточнить
+                        </a>
+                    </div>
                 </div>
             </div>
 
             <!-- Эвакуатор -->
             <div class="service-card">
-                <img src="images/truck.jpg" alt="Эвакуатор">
-                <h3>Эвакуатор</h3>
-                <p>Транспортировка автомобилей любой грузоподъемности</p>
-                <div class="buttons">
-                    <a href="tg://resolve?domain=your_telegram" class="btn telegram">
-                        <i class="fab fa-telegram"></i> Telegram
-                    </a>
-                    <a href="https://wa.me/79991234567" class="btn whatsapp">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </a>
+                <div class="service-icon truck">
+                    <i class="fas fa-truck-pickup"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Эвакуационная служба</h3>
+                    <ul class="service-features">
+                        <li><i class="fas fa-clock"></i> Грузоподъемность до 5 тонн</li>
+                        <li><i class="fas fa-ruble-sign"></i> Стоимость: от 3000₽</li>
+                        <li><i class="fas fa-check-circle"></i> Круглосуточный выезд</li>
+                    </ul>
+                    <div class="service-buttons">
+                        <a href="https://t.me/Rus69alex" class="btn telegram" target="_blank">
+                            <i class="fab fa-telegram"></i> Заказать
+                        </a>
+                        <a href="https://wa.me/79290957455" class="btn whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Уточнить
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -141,10 +216,14 @@
 
     <footer>
         <div class="container">
-            <p>⏰ Круглосуточно | 🚚 30-60 минут на месте | 💵 Наличные/карта</p>
+            <div class="footer-info">
+                <p>© 2024 AutoHelper24</p>
+                <p>Круглосуточная служба помощи</p>
+                <a href="https://helper-177.github.io/" class="site-link" target="_blank">
+                    <i class="fas fa-external-link-alt"></i> Официальный сайт
+                </a>
+            </div>
         </div>
     </footer>
-
-    <script src="js/script.js"></script>
 </body>
 </html>
