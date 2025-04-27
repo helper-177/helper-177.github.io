@@ -9,8 +9,6 @@
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Roboto+Mono&display=swap" rel="stylesheet">
-    <!-- Иконка для кнопки темы -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <!-- Прелоадер -->
@@ -347,71 +345,19 @@
         </div>
     </footer>
 
-    <script>
-        // Прелоадер
-        window.addEventListener('load', () => {
-            const loader = document.querySelector('.loader');
-            loader.style.opacity = '0';
-            setTimeout(() => {
-                loader.style.display = 'none';
-            }, 500);
-        });
-
-        // Система оценок
-        document.querySelectorAll('.star').forEach(star => {
-            star.addEventListener('click', function() {
-                const rating = this.dataset.rating;
-                const service = this.closest('.rating-stars').dataset.service;
-                
-                localStorage.setItem(`rating_${service}`, rating);
-                
-                this.parentElement.querySelectorAll('.star').forEach((s, index) => {
-                    s.classList.toggle('active', index < rating);
-                });
-            });
-        });
-
-        // Загрузка сохраненных оценок
-        document.querySelectorAll('.rating-stars').forEach(container => {
-            const service = container.dataset.service;
-            const savedRating = localStorage.getItem(`rating_${service}`);
-            
-            if(savedRating) {
-                container.querySelectorAll('.star').forEach((s, index) => {
-                    s.classList.toggle('active', index < savedRating);
-                });
-            }
-        });
-
-        // Анимация при скролле
-        const animateOnScroll = () => {
-            const cards = document.querySelectorAll('.service-card');
-            
-            cards.forEach((card, index) => {
-                card.style.setProperty('--index', index);
-                const rect = card.getBoundingClientRect();
-                
-                if(rect.top < window.innerHeight * 0.8) {
-                    card.style.animationPlayState = 'running';
-                }
-            });
-        }
-
-        window.addEventListener('scroll', animateOnScroll);
-        animateOnScroll();
-    </script>
-    <script src="js/script.js"></script>
     <!-- Модальное окно темы -->
-<div class="theme-modal" id="themeModal">
-    <div class="theme-modal-content">
-        <h3>Выберите тему</h3>
-        <p>Для вашего удобства можно переключиться на темную тему</p>
-        <div class="theme-options">
-            <button class="theme-btn light-btn">Светлая</button>
-            <button class="theme-btn dark-btn">Тёмная</button>
+    <div class="theme-modal" id="themeModal">
+        <div class="theme-modal-content">
+            <h3>Выберите тему</h3>
+            <p>Для вашего удобства можно переключиться на темную тему</p>
+            <div class="theme-options">
+                <button class="theme-btn light-btn">Светлая</button>
+                <button class="theme-btn dark-btn">Тёмная</button>
+            </div>
+            <button class="theme-close" id="closeThemeModal">Закрыть</button>
         </div>
-        <button class="theme-close" id="closeThemeModal">Закрыть</button>
     </div>
-</div>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
