@@ -4,6 +4,8 @@
     --accent-color: #e74c3c;
     --telegram-color: #0088cc;
     --whatsapp-color: #25d366;
+    --text-color: #333;
+    --bg-color: #f8f9fa;
 }
 
 * {
@@ -13,17 +15,49 @@
     font-family: 'Roboto', sans-serif;
 }
 
-body {
-    background: #f8f9fa;
+html {
+    scroll-behavior: smooth;
 }
 
-.container {
-    padding: 15px;
-    max-width: 600px;
-    margin: 0 auto;
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Прелоадер */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s;
+}
+
+.loader-icon {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid var(--accent-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
 }
 
 /* Шапка */
+header {
+    background: white;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
 .logo-header {
     text-align: center;
     padding: 20px 0;
@@ -58,21 +92,44 @@ h1 span {
     color: var(--primary-color);
     font-size: 1.4rem;
     transition: transform 0.3s;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.05);
 }
 
-.contact-link:hover {
-    transform: scale(1.2);
+/* Основной контент */
+.container {
+    padding: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.services-grid {
+    display: grid;
+    gap: 20px;
+    padding: 30px 0;
 }
 
 /* Карточки услуг */
 .service-card {
     background: white;
-    border-radius: 15px;
-    margin: 15px 0;
-    padding: 15px;
+    border-radius: 20px;
+    padding: 20px;
     display: flex;
     gap: 15px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
 }
 
 .service-icon {
@@ -86,14 +143,38 @@ h1 span {
     font-size: 1.8rem;
     color: white;
     transition: transform 0.3s;
+    flex-shrink: 0;
 }
 
 .service-icon:hover {
-    transform: rotate(15deg);
+    transform: rotate(15deg) scale(1.1);
 }
 
 .service-content {
     flex: 1;
+}
+
+.service-content h3 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.price-label {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--accent-color);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 0.9em;
+    box-shadow: 0 3px 10px rgba(231, 76, 60, 0.3);
+}
+
+.service-features {
+    margin: 15px 0;
 }
 
 .service-features li {
@@ -106,6 +187,13 @@ h1 span {
     gap: 8px;
 }
 
+.service-features i {
+    color: var(--accent-color);
+    width: 20px;
+    text-align: center;
+}
+
+/* Кнопки связи */
 .service-buttons {
     display: flex;
     gap: 10px;
@@ -113,14 +201,17 @@ h1 span {
     justify-content: flex-end;
 }
 
-.btn {
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-size: 0.9rem;
+.btn-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
-    gap: 5px;
+    justify-content: center;
+    font-size: 24px;
     transition: all 0.3s;
+    text-decoration: none;
+    color: white;
 }
 
 .telegram {
@@ -131,18 +222,44 @@ h1 span {
     background: var(--whatsapp-color);
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
+.btn-icon:hover {
+    transform: scale(1.2) rotate(15deg);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Чат-кнопка */
+.chat-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: var(--telegram-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.chat-button a {
+    color: white;
+    font-size: 28px;
+    text-decoration: none;
 }
 
 /* Футер */
 footer {
     background: var(--primary-color);
     color: white;
-    padding: 25px 0;
-    margin-top: 30px;
+    padding: 30px 0;
+    margin-top: 50px;
+}
+
+.footer-info {
+    text-align: center;
 }
 
 .site-link {
@@ -151,22 +268,80 @@ footer {
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    margin-top: 10px;
+    margin-top: 15px;
+    transition: opacity 0.3s;
+}
+
+.site-link:hover {
+    opacity: 0.8;
+}
+
+/* Анимации */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes pulse-animation {
+    0% { 
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.4);
+    }
+    70% { 
+        transform: scale(1.05);
+        box-shadow: 0 0 0 15px rgba(231, 76, 60, 0);
+    }
+    100% { 
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
+    }
 }
 
 /* Адаптивность */
 @media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
     .service-card {
         flex-direction: column;
         align-items: center;
         text-align: center;
+        padding: 15px;
     }
-    
+
+    .service-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 1.5rem;
+    }
+
     .service-buttons {
         justify-content: center;
     }
-    
-    .service-features li {
+
+    .price-label {
+        position: static;
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+
+    .header-contacts {
+        position: static;
         justify-content: center;
+        margin-top: 10px;
+    }
+
+    .chat-button {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
     }
 }
