@@ -91,6 +91,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Управление темой
 function initTheme() {
+if (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    setTheme('dark');
+}
     // Проверяем сохраненную тему
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
