@@ -36,12 +36,11 @@ function setTheme(theme) {
 function toggleTheme() {
     const isDark = document.body.classList.contains('dark-theme');
     setTheme(isDark ? 'light' : 'dark');
+    updateThemeIcon();
 }
 
 function updateThemeIcon() {
     const icon = document.querySelector('.theme-switcher i');
-    if (!icon) return;
-    
     if (document.body.classList.contains('dark-theme')) {
         icon.classList.replace('fa-moon', 'fa-sun');
     } else {
