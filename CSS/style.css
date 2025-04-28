@@ -1,6 +1,6 @@
 /* Основные переменные */
 :root {
-    --primary-color: #2c3e50;
+    --primary-color: #1a2a3a; /* Более темный оттенок для заголовков */
     --accent-color: #e74c3c;
     --telegram-color: #0088cc;
     --whatsapp-color: #25d366;
@@ -94,7 +94,8 @@ header {
 h1, h2, h3 {
     font-family: var(--font-secondary);
     letter-spacing: -0.03em;
-    color: var(--text-color);
+    color: var(--primary-color); /* Применяем более темный цвет */
+    font-weight: 700;
 }
 
 h1 {
@@ -111,7 +112,7 @@ h1 span {
     top: 20px;
     right: 15px;
     display: flex;
-    gap: 15px;
+    gap: 20px; /* Увеличено расстояние между иконками */
 }
 
 .contact-link {
@@ -166,10 +167,29 @@ h1 span {
     color: white;
     transition: transform 0.3s;
     flex-shrink: 0;
+    position: relative;
 }
 
 .service-icon:hover {
     transform: rotate(15deg) scale(1.1);
+}
+
+/* Специальные стили для WAF иконки */
+.service-icon.unlock {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+}
+
+.service-icon.unlock::after {
+    content: "WAF";
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    font-family: var(--font-secondary);
+    white-space: nowrap;
 }
 
 .service-content {
@@ -242,7 +262,7 @@ h1 span {
 /* Кнопки связи */
 .service-buttons {
     display: flex;
-    gap: 10px;
+    gap: 15px; /* Увеличено расстояние между кнопками */
     margin-top: 15px;
     justify-content: flex-end;
 }
@@ -488,6 +508,11 @@ body.dark-theme .theme-close {
         width: 70px;
         height: 70px;
         font-size: 1.5rem;
+    }
+
+    .service-icon.unlock::after {
+        bottom: -20px;
+        font-size: 0.6rem;
     }
 
     .service-buttons {
