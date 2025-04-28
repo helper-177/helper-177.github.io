@@ -1,16 +1,38 @@
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
-    initTheme();
-    initRatingSystem();
-    createThemeSwitcher();
-    animateOnScroll();
-    setupServiceCards();
-    setupModal();
+    try {
+        initTheme();
+        initRatingSystem();
+        animateOnScroll();
+        setupServiceCards();
+        setupModal();
+        
+        // Проверка, если страница уже загружена
+        if (document.readyState === 'complete') {
+            hideLoader();
+        }
+    } catch (e) {
+        console.error("Initialization error:", e);
+        hideLoader();
+    }
 });
+
+// Функция скрытия прелоадера
+function hideLoader() {
+    const loader = document.querySelector('.loader');
+    if (loader) {
+        loader.style.opacity = '0';
+        setTimeout(() => {
+            loader.style.display = 'none';
+        }, 500);
+    }
+}
+
+// Обработчик полной загрузки страницы
+window.addEventListener('load', hideLoader);
 
 // ====================== ТЕМА ====================== //
 function initTheme() {
-    // Проверяем сохраненную тему или системные настройки
     const savedTheme = localStorage.getItem('theme');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
@@ -18,16 +40,10 @@ function initTheme() {
         setTheme(savedTheme);
     } else if (systemPrefersDark) {
         setTheme('dark');
-    } else {
-        // Показываем модалку только при первом посещении
-        if (!localStorage.getItem('themeShown')) {
-            setTimeout(showThemeModal, 3000);
-        }
+    } else if (!localStorage.getItem('themeShown')) {
+        setTimeout(showThemeModal, 3000);
     }
 }
-document.querySelector('.theme-switcher').addEventListener('click', function() {
-    toggleTheme();
-});
 
 function setTheme(theme) {
     document.body.classList.remove('light-theme', 'dark-theme');
@@ -39,26 +55,21 @@ function setTheme(theme) {
 function toggleTheme() {
     const isDark = document.body.classList.contains('dark-theme');
     setTheme(isDark ? 'light' : 'dark');
-    updateThemeIcon();
 }
 
 function updateThemeIcon() {
     const icon = document.querySelector('.theme-switcher i');
-    if (document.body.classList.contains('dark-theme')) {
-        icon.classList.replace('fa-moon', 'fa-sun');
-    } else {
-        icon.classList.replace('fa-sun', 'fa-moon');
+    if (icon) {
+        if (document.body.classList.contains('dark-theme')) {
+            icon.classList.replace('fa-moon', 'fa-sun');
+        } else {
+            icon.classList.replace('fa-sun', 'fa-moon');
+        }
     }
 }
 
-function createThemeSwitcher() {
-    const switcher = document.createElement('div');
-    switcher.className = 'theme-switcher';
-    switcher.innerHTML = document.body.classList.contains('dark-theme') ? 
-        '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-    switcher.addEventListener('click', toggleTheme);
-    document.body.appendChild(switcher);
-}
+// Обработчик для кнопки смены темы
+document.querySelector('.theme-switcher')?.addEventListener('click', toggleTheme);
 
 // ====================== МОДАЛЬНОЕ ОКНО ====================== //
 function setupModal() {
