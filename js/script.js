@@ -25,6 +25,9 @@ function initTheme() {
         }
     }
 }
+document.querySelector('.theme-switcher').addEventListener('click', function() {
+    toggleTheme();
+});
 
 function setTheme(theme) {
     document.body.classList.remove('light-theme', 'dark-theme');
