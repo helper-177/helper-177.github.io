@@ -1,17 +1,13 @@
 :root {
-    --primary-color: #2563eb;
-    --primary-dark: #1e40af;
-    --accent-color: #ef4444;
-    --text-color: #1f2937;
-    --text-light: #6b7280;
-    --bg-color: #f9fafb;
-    --card-bg: #ffffff;
-    --border-color: #e5e7eb;
-    --success-color: #10b981;
-    --font-primary: 'Montserrat', sans-serif;
-    --font-secondary: 'Roboto', sans-serif;
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --bg-color: #121212;
+  --card-bg: #1e1e1e;
+  --text-color: #e0e0e0;
+  --text-light: #a0a0a0;
+  --primary-color: #4f8cff;
+  --primary-dark: #3b75e0;
+  --accent-color: #ff6b6b;
+  --border-color: #2d2d2d;
+  --success-color: #47d7ac;
 }
 
 * {
