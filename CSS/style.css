@@ -1,15 +1,14 @@
 :root {
-  --bg-color: #17241d;
-  --card-bg: #22342a;
-  --text-color: #d8e6d9;
-  --text-light: #92a894;
-  --primary-color: #4caf50;
-  --primary-dark: #3d8b40;
-  --accent-color: #ff9800;
-  --border-color: #2d4034;
-  --success-color: #4caf50;
+  --bg-color: #1a1818;
+  --card-bg: #242020;
+  --text-color: #e8e2d9;
+  --text-light: #a89f92;
+  --primary-color: #e9b44c;
+  --primary-dark: #d09b3d;
+  --accent-color: #9b2915;
+  --border-color: #3a3535;
+  --success-color: #50a2a7;
 }
-
 * {
     margin: 0;
     padding: 0;
