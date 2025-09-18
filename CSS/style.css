@@ -1,17 +1,21 @@
 :root {
-  --bg-color: #f1f5f9;
-  --card-bg: #ffffff;
-  --card-bg-hover: #f8fafc;
-  --text-color: #1e293b;
-  --text-light: #64748b;
-  --primary-color: #2563eb;
-  --primary-dark: #1d4ed8;
-  --accent-color: #ef4444;
-  --border-color: #e2e8f0;
-  --success-color: #10b981;
-  --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.08);
-  --gradient-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(241, 245, 249, 0.95) 100%);
+  --bg-color: #242830; /* На 30% светлее чем было */
+  --card-bg: #2d323d; /* На 30% светлее */
+  --card-bg-hover: #353b48; /* На 30% светлее */
+  --header-bg: #1a1d24; /* Оставляем шапку темнее */
+  --text-color: #e8eaed;
+  --text-light: #9aa0a6;
+  --primary-color: #5e9bff;
+  --primary-dark: #4a85e0;
+  --accent-color: #ff7b7b;
+  --border-color: #3a404a;
+  --success-color: #57e0b5;
+  --telegram-color: #2aabee;
+  --whatsapp-color: #25d366;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --font-primary: 'Montserrat', sans-serif;
+  --font-secondary: 'Roboto', sans-serif;
 }
 
 * {
@@ -70,15 +74,16 @@ body {
   100% { transform: rotate(360deg); }
 }
 
-/* Шапка */
+/* Шапка - делаем темнее и добавляем градиент */
 header {
-  background: var(--card-bg);
+  background: linear-gradient(135deg, var(--header-bg) 0%, #15181e 100%);
   box-shadow: var(--shadow);
   position: sticky;
   top: 0;
   z-index: 100;
   padding: 15px 0;
   backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--primary-color);
 }
 
 header .container {
@@ -129,15 +134,17 @@ h1 span {
   text-decoration: none;
   font-weight: 600;
   font-size: 1.1rem;
-  transition: color 0.3s;
-  background: rgba(94, 155, 255, 0.1);
+  transition: all 0.3s;
+  background: rgba(94, 155, 255, 0.15);
   padding: 10px 15px;
   border-radius: 8px;
+  border: 1px solid rgba(94, 155, 255, 0.2);
 }
 
 .contact-link:hover {
   color: var(--primary-color);
-  background: rgba(94, 155, 255, 0.2);
+  background: rgba(94, 155, 255, 0.25);
+  transform: translateY(-2px);
 }
 
 /* Анимация пульсации */
@@ -214,7 +221,7 @@ h2:after {
   align-items: center;
   margin-bottom: 60px;
   padding: 40px 0;
-  background: linear-gradient(135deg, rgba(36, 40, 48, 0.8) 0%, rgba(26, 29, 36, 0.9) 100%);
+  background: linear-gradient(135deg, rgba(45, 50, 61, 0.8) 0%, rgba(36, 40, 48, 0.9) 100%);
   border-radius: 16px;
   position: relative;
   overflow: hidden;
@@ -227,8 +234,8 @@ h2:after {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTIgMTJoMzZvMzZIMTJ6IiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgLz48L3N2Zz4=');
-  opacity: 0.15;
+  background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTIgMTJoMzZ2MzZIMTJ6IiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgLz48L3N2Zz4=');
+  opacity: 0.1;
   z-index: -1;
 }
 
@@ -262,9 +269,10 @@ h2:after {
   align-items: center;
   gap: 10px;
   font-weight: 500;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.08);
   padding: 12px 15px;
   border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .feature-item i {
@@ -293,6 +301,7 @@ h2:after {
   transition: all 0.3s ease;
   background: var(--card-bg);
   padding: 15px;
+  border: 1px solid var(--border-color);
 }
 
 .hero-logo:hover {
@@ -465,7 +474,7 @@ h2:after {
 
 /* География обслуживания */
 .coverage-section {
-  background: linear-gradient(135deg, rgba(36, 40, 48, 0.8) 0%, rgba(26, 29, 36, 0.9) 100%);
+  background: linear-gradient(135deg, rgba(45, 50, 61, 0.8) 0%, rgba(36, 40, 48, 0.9) 100%);
   padding: 40px 30px;
   border-radius: 16px;
 }
@@ -665,7 +674,7 @@ h2:after {
 
 /* Секция приложения */
 .app-section {
-  background: linear-gradient(135deg, rgba(36, 40, 48, 0.8) 0%, rgba(26, 29, 36, 0.9) 100%);
+  background: linear-gradient(135deg, rgba(45, 50, 61, 0.8) 0%, rgba(36, 40, 48, 0.9) 100%);
   padding: 40px 30px;
   border-radius: 16px;
   text-align: center;
@@ -788,11 +797,11 @@ h2:after {
 
 /* Подвал */
 footer {
-  background: var(--card-bg);
+  background: var(--header-bg); /* Используем тот же цвет что и у шапки */
   color: var(--text-color);
   padding: 50px 0 20px;
   margin-top: 60px;
-  border-top: 1px solid var(--border-color);
+  border-top: 2px solid var(--primary-color);
 }
 
 .footer-content {
