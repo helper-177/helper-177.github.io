@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Автоматическое закрытие через 6 секунд
             setTimeout(function() {
                 androidModal.style.display = 'none';
-            }, 6000);
+            },30000);
         });
     }
     
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Автоматическое закрытие через 6 секунд
             setTimeout(function() {
                 iosModal.style.display = 'none';
-            }, 6000);
+            }, 15000);
         });
     }
     
