@@ -72,3 +72,55 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.classList.add('ios-device');
     }
 });
+
+// Обработка инструкций для приложений
+document.addEventListener('DOMContentLoaded', function() {
+    const androidInstructionLink = document.getElementById('showAndroidInstruction');
+    const iosInstructionLink = document.getElementById('showIosInstruction');
+    const androidModal = document.getElementById('androidInstructionModal');
+    const iosModal = document.getElementById('iosInstructionModal');
+    const closeModals = document.querySelectorAll('.close-modal');
+    
+    // Открытие модального окна для Android
+    if (androidInstructionLink && androidModal) {
+        androidInstructionLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            androidModal.style.display = 'block';
+            
+            // Автоматическое закрытие через 6 секунд
+            setTimeout(function() {
+                androidModal.style.display = 'none';
+            }, 6000);
+        });
+    }
+    
+    // Открытие модального окна для iOS
+    if (iosInstructionLink && iosModal) {
+        iosInstructionLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            iosModal.style.display = 'block';
+            
+            // Автоматическое закрытие через 6 секунд
+            setTimeout(function() {
+                iosModal.style.display = 'none';
+            }, 6000);
+        });
+    }
+    
+    // Закрытие модальных окон
+    closeModals.forEach(function(closeBtn) {
+        closeBtn.addEventListener('click', function() {
+            const modal = this.closest('.instruction-modal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
+    
+    // Закрытие модальных окон по клику вне их области
+    window.addEventListener('click', function(e) {
+        if (e.target.classList.contains('instruction-modal')) {
+            e.target.style.display = 'none';
+        }
+    });
+});
