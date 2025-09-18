@@ -1,189 +1,106 @@
-// Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
-    try {
-        initTheme();
-        initRatingSystem();
-        animateOnScroll();
-        setupServiceCards();
-        setupModal();
-        
-        // Проверка, если страница уже загружена
-        if (document.readyState === 'complete') {
-            hideLoader();
+    // Скрываем прелоадер
+    setTimeout(function() {
+        const loader = document.querySelector('.loader');
+        if (loader) {
+            loader.style.opacity = '0';
+            setTimeout(function() {
+                loader.style.display = 'none';
+            }, 500);
         }
-    } catch (e) {
-        console.error("Initialization error:", e);
-        hideLoader();
-    }
-});
-
-// Функция скрытия прелоадера
-function hideLoader() {
-    const loader = document.querySelector('.loader');
-    if (loader) {
-        loader.style.opacity = '0';
-        setTimeout(() => {
-            loader.style.display = 'none';
-        }, 500);
-    }
-}
-
-// Обработчик полной загрузки страницы
-window.addEventListener('load', hideLoader);
-
-// ====================== ТЕМА ====================== //
-function initTheme() {
-    const savedTheme = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }, 1000);
     
-    if (savedTheme) {
-        setTheme(savedTheme);
-    } else if (systemPrefersDark) {
-        setTheme('dark');
-    } else if (!localStorage.getItem('themeShown')) {
-        setTimeout(showThemeModal, 3000);
-    }
-}
-
-function setTheme(theme) {
-    document.body.classList.remove('light-theme', 'dark-theme');
-    document.body.classList.add(theme + '-theme');
-    localStorage.setItem('theme', theme);
-    updateThemeIcon();
-}
-
-function toggleTheme() {
-    const isDark = document.body.classList.contains('dark-theme');
-    setTheme(isDark ? 'light' : 'dark');
-}
-
-function updateThemeIcon() {
-    const icon = document.querySelector('.theme-switcher i');
-    if (icon) {
-        if (document.body.classList.contains('dark-theme')) {
-            icon.classList.replace('fa-moon', 'fa-sun');
-        } else {
-            icon.classList.replace('fa-sun', 'fa-moon');
-        }
-    }
-}
-
-// Обработчик для кнопки смены темы
-document.querySelector('.theme-switcher')?.addEventListener('click', toggleTheme);
-
-// ====================== МОДАЛЬНОЕ ОКНО ====================== //
-function setupModal() {
-    const modal = document.getElementById('themeModal');
-    if (!modal) return;
-
-    document.getElementById('closeThemeModal')?.addEventListener('click', () => {
-        modal.classList.remove('active');
-    });
-
-    document.querySelectorAll('.theme-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const theme = this.classList.contains('light-btn') ? 'light' : 'dark';
-            setTheme(theme);
-            modal.classList.remove('active');
-            localStorage.setItem('themeShown', 'true');
-        });
-    });
-}
-
-function showThemeModal() {
-    const modal = document.getElementById('themeModal');
-    if (modal) {
-        modal.classList.add('active');
-    }
-}
-
-// ====================== СИСТЕМА ОЦЕНОК ====================== //
-function initRatingSystem() {
-    // Загрузка сохраненных оценок
-    document.querySelectorAll('.rating-stars').forEach(container => {
-        const service = container.dataset.service;
-        const savedRating = localStorage.getItem(`rating_${service}`);
+    // Обработка FAQ
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
         
-        if (savedRating) {
-            updateStars(container, savedRating);
-        }
-    });
-
-    // Обработка кликов по звездам
-    document.querySelectorAll('.star').forEach(star => {
-        star.addEventListener('click', function() {
-            const rating = this.dataset.rating;
-            const container = this.closest('.rating-stars');
-            const service = container.dataset.service;
+        question.addEventListener('click', () => {
+            // Закрываем все открытые FAQ
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item && otherItem.classList.contains('active')) {
+                    otherItem.classList.remove('active');
+                }
+            });
             
-            localStorage.setItem(`rating_${service}`, rating);
-            updateStars(container, rating);
-            animateStar(this);
+            // Переключаем текущий FAQ
+            item.classList.toggle('active');
         });
     });
-}
-
-function updateStars(container, rating) {
-    container.querySelectorAll('.star').forEach((star, index) => {
-        star.classList.toggle('active', index < rating);
-    });
-}
-
-function animateStar(star) {
-    star.animate([
-        { transform: 'scale(1)', opacity: 1 },
-        { transform: 'scale(1.3)', opacity: 0.7 },
-        { transform: 'scale(1.1)', opacity: 1 }
-    ], {
-        duration: 300,
-        easing: 'ease-out'
-    });
-}
-
-// ====================== АНИМАЦИИ ====================== //
-function setupServiceCards() {
-    // Устанавливаем индекс для анимации
-    document.querySelectorAll('.service-card').forEach((card, index) => {
-        card.style.setProperty('--index', index);
-    });
-}
-
-function animateOnScroll() {
-    const cards = document.querySelectorAll('.service-card');
-    const windowHeight = window.innerHeight;
     
-    cards.forEach(card => {
-        const rect = card.getBoundingClientRect();
-        const cardTop = rect.top;
-        
-        if (cardTop < windowHeight * 0.8) {
-            card.style.animationPlayState = 'running';
-        }
+    // Плавная прокрутка для якорей
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
     });
-}
-
-// Оптимизированный обработчик скролла
-let isScrolling;
-window.addEventListener('scroll', () => {
-    window.clearTimeout(isScrolling);
-    isScrolling = setTimeout(() => {
-        animateOnScroll();
-    }, 50);
-}, { passive: true });
-
-// ====================== ПРЕЛОАДЕР ====================== //
-window.addEventListener('load', function() {
-    const loader = document.querySelector('.loader');
-    if (loader) {
-        loader.style.opacity = '0';
-        setTimeout(() => {
-            loader.style.display = 'none';
-        }, 500);
+    
+    // Анимация появления элементов при скролле
+    const animateOnScroll = function() {
+        const elements = document.querySelectorAll('.service-card, .review-card, .extra-card');
+        
+        elements.forEach(element => {
+            const elementPosition = element.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.3;
+            
+            if (elementPosition < screenPosition) {
+                element.style.opacity = 1;
+                element.style.transform = 'translateY(0)';
+            }
+        });
+    };
+    
+    // Устанавливаем начальные стили для анимации
+    const animatedElements = document.querySelectorAll('.service-card, .review-card, .extra-card');
+    animatedElements.forEach(element => {
+        element.style.opacity = 0;
+        element.style.transform = 'translateY(20px)';
+        element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    });
+    
+    // Запускаем проверку при загрузке и скролле
+    window.addEventListener('load', animateOnScroll);
+    window.addEventListener('scroll', animateOnScroll);
+    
+    // Обработка клика по номеру телефона
+    const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
+    phoneLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            // Можно добавить аналитику здесь
+            console.log('Телефонный звонок инициирован: ' + this.getAttribute('href'));
+        });
+    });
+    
+    // Улучшение для пользователей iOS
+    const isIos = () => {
+        return [
+            'iPad Simulator',
+            'iPhone Simulator',
+            'iPod Simulator',
+            'iPad',
+            'iPhone',
+            'iPod'
+        ].includes(navigator.platform) || 
+        (navigator.userAgent.includes("Mac") && "ontouchend" in document);
+    };
+    
+    if (isIos()) {
+        document.body.classList.add('ios-device');
+        const appSection = document.querySelector('.app-section');
+        if (appSection) {
+            appSection.style.display = 'block';
+        }
     }
-});
-
-// ====================== ЧАТ-КНОПКА ====================== //
-document.querySelector('.chat-button')?.addEventListener('click', function() {
-    // Дополнительные действия при клике на чат
-    console.log('Чат открыт');
 });
