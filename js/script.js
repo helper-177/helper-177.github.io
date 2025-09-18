@@ -170,6 +170,9 @@ document.addEventListener('DOMContentLoaded', function() {
         openOrderFormBtn.addEventListener('click', function() {
             orderModal.style.display = 'block';
             document.body.style.overflow = 'hidden'; // Блокируем прокрутку фона
+            
+            // Инициализация обработки мобильной клавиатуры
+            setTimeout(handleMobileKeyboard, 100);
         });
     }
     
@@ -187,6 +190,12 @@ document.addEventListener('DOMContentLoaded', function() {
             // Валидация формы
             if (!serviceType || !userName || !userPhone || !userLocation) {
                 alert('Пожалуйста, заполните все обязательные поля!');
+                return;
+            }
+            
+            // Валидация телефона
+            if (!isValidPhone(userPhone)) {
+                alert('Пожалуйста, введите корректный номер телефона');
                 return;
             }
             
@@ -209,10 +218,8 @@ document.addEventListener('DOMContentLoaded', function() {
             sendToTelegram(message)
                 .then(() => {
                     // Успешная отправка
-                    alert('✅ Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.');
+                    showFormSuccess();
                     orderForm.reset();
-                    orderModal.style.display = 'none';
-                    document.body.style.overflow = ''; // Восстанавливаем прокрутку
                     
                     // Отправка события в аналитику
                     if (typeof gtag !== 'undefined') {
@@ -297,6 +304,9 @@ document.addEventListener('DOMContentLoaded', function() {
         mapScript.onload = initMap;
         document.head.appendChild(mapScript);
     }
+    
+    // Инициализация обработки мобильной клавиатуры
+    handleMobileKeyboard();
 });
 
 // Функция отправки в Telegram
@@ -383,4 +393,106 @@ window.addEventListener('orientationchange', function() {
         
         animateOnScroll();
     }, 300);
+});
+
+// Функция для обработки мобильной клавиатуры
+function handleMobileKeyboard() {
+    if (!window.matchMedia('(max-width: 768px)').matches) return;
+    
+    const formElements = document.querySelectorAll('#orderForm input, #orderForm textarea, #orderForm select');
+    const modal = document.getElementById('orderModal');
+    const submitButton = document.querySelector('#orderForm button[type="submit"]');
+    
+    if (!modal || !submitButton) return;
+    
+    formElements.forEach(element => {
+        // При фокусе прокручиваем к элементу
+        element.addEventListener('focus', function() {
+            setTimeout(() => {
+                this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Дополнительная прокрутка для текстовых полей
+                if (this.tagName === 'TEXTAREA') {
+                    window.scrollBy(0, 100);
+                }
+            }, 300);
+        });
+        
+        // Для текстовых полей добавляем кнопку "Готово"
+        if (element.tagName === 'INPUT' && element.type !== 'select') {
+            element.setAttribute('enterkeyhint', 'done');
+        }
+    });
+    
+    // Отслеживаем изменение размера окна (появление клавиатуры)
+    let initialHeight = window.innerHeight;
+    
+    window.addEventListener('resize', () => {
+        const modal = document.getElementById('orderModal');
+        if (!modal || modal.style.display !== 'block') return;
+        
+        const newHeight = window.innerHeight;
+        const heightDifference = initialHeight - newHeight;
+        
+        if (heightDifference > 100) { // Клавиатура открылась
+            // Прокручиваем к активному элементу
+            const activeElement = document.activeElement;
+            if (activeElement && activeElement.form === document.getElementById('orderForm')) {
+                setTimeout(() => {
+                    activeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    window.scrollBy(0, 50);
+                }, 300);
+            }
+        }
+        
+        initialHeight = newHeight;
+    });
+}
+
+// Функция валидации телефона
+function isValidPhone(phone) {
+    const phoneRegex = /^[\+]?[78][-(]?\d{3}\)?-?\d{3}-?\d{2}-?\d{2}$/;
+    return phoneRegex.test(phone.replace(/\s/g, ''));
+}
+
+// Функция показа успешной отправки формы
+function showFormSuccess() {
+    const orderForm = document.getElementById('orderForm');
+    if (!orderForm) return;
+    
+    // Сохраняем оригинальное содержимое
+    const originalContent = orderForm.innerHTML;
+    
+    // Заменяем на сообщение об успехе
+    orderForm.innerHTML = `
+        <div class="form-success">
+            <i class="fas fa-check-circle"></i>
+            <h3>Заявка отправлена!</h3>
+            <p>Мы свяжемся с вами в ближайшее время</p>
+        </div>
+    `;
+    
+    // Автоматическое закрытие через 3 секунды
+    setTimeout(() => {
+        const orderModal = document.getElementById('orderModal');
+        if (orderModal) {
+            orderModal.style.display = 'none';
+            document.body.style.overflow = '';
+            
+            // Восстанавливаем оригинальную форму
+            setTimeout(() => {
+                orderForm.innerHTML = originalContent;
+            }, 300);
+        }
+    }, 3000);
+}
+
+// Обработчик для кнопки "Закрыть" в сообщении об успехе
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('close-success')) {
+        const successMessage = document.querySelector('.form-success');
+        if (successMessage) {
+            successMessage.remove();
+        }
+    }
 });
