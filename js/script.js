@@ -29,24 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Плавная прокрутка для якорей
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-    
     // Анимация появления элементов при скролле
     const animateOnScroll = function() {
         const elements = document.querySelectorAll('.service-card, .review-card, .extra-card');
@@ -56,19 +38,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const screenPosition = window.innerHeight / 1.3;
             
             if (elementPosition < screenPosition) {
-                element.style.opacity = 1;
-                element.style.transform = 'translateY(0)';
+                element.classList.add('visible');
             }
         });
     };
-    
-    // Устанавливаем начальные стили для анимации
-    const animatedElements = document.querySelectorAll('.service-card, .review-card, .extra-card');
-    animatedElements.forEach(element => {
-        element.style.opacity = 0;
-        element.style.transform = 'translateY(20px)';
-        element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    });
     
     // Запускаем проверку при загрузке и скролле
     window.addEventListener('load', animateOnScroll);
@@ -78,7 +51,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
     phoneLinks.forEach(link => {
         link.addEventListener('click', function() {
-            // Можно добавить аналитику здесь
             console.log('Телефонный звонок инициирован: ' + this.getAttribute('href'));
         });
     });
@@ -98,9 +70,5 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (isIos()) {
         document.body.classList.add('ios-device');
-        const appSection = document.querySelector('.app-section');
-        if (appSection) {
-            appSection.style.display = 'block';
-        }
     }
 });
