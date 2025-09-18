@@ -81,6 +81,7 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.8);
     animation: fadeIn 0.3s;
+    overflow-y: auto;
 }
 
 @keyframes fadeIn {
@@ -100,6 +101,8 @@
     animation: slideIn 0.3s;
     color: var(--text-color);
     border: 1px solid var(--border-color);
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 @keyframes slideIn {
@@ -116,6 +119,7 @@
     color: var(--text-light);
     cursor: pointer;
     transition: color 0.3s;
+    z-index: 10;
 }
 
 .close-modal:hover {
@@ -190,32 +194,7 @@
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Адаптивность для модальных окон */
-@media (max-width: 768px) {
-    .modal-content {
-        width: 95%;
-        margin: 10% auto;
-        padding: 20px 15px;
-    }
-    
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-        padding: 10px 12px;
-    }
-    
-    .step {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-    }
-    
-    .step-number {
-        margin-right: 0;
-    }
+   100% { transform: rotate(360deg); }
 }
 
 /* Стили для состояния загрузки */
@@ -255,4 +234,142 @@
 
 .form-success p {
     color: var(--text-light);
+}
+
+/* ОСНОВНЫЕ ИСПРАВЛЕНИЯ ДЛЯ ФОРМЫ ЗАЯВОК */
+
+/* Контейнер формы */
+#orderForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 65vh;
+    overflow-y: auto;
+    padding-right: 5px;
+    margin-bottom: 20px;
+}
+
+/* Полоса прокрутки для формы */
+#orderForm::-webkit-scrollbar {
+    width: 6px;
+}
+
+#orderForm::-webkit-scrollbar-track {
+    background: var(--card-bg);
+    border-radius: 3px;
+}
+
+#orderForm::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 3px;
+}
+
+#orderForm::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* Фиксированная кнопка отправки */
+#orderForm .form-submit-container {
+    position: sticky;
+    bottom: 0;
+    background: var(--card-bg);
+    padding: 15px 0 5px;
+    margin-top: 10px;
+    z-index: 5;
+}
+
+/* Адаптивность для модальных окон */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 5% auto;
+        padding: 20px 15px;
+        max-height: 85vh;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 12px 15px;
+        font-size: 16px; /* Увеличиваем для мобильных устройств */
+    }
+    
+    .step {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .step-number {
+        margin-right: 0;
+    }
+    
+    /* Мобильная адаптация формы */
+    #orderForm {
+        max-height: 60vh;
+        gap: 12px;
+    }
+    
+    /* Увеличиваем область касания для мобильных */
+    .form-group input, 
+    .form-group select, 
+    .form-group textarea {
+        min-height: 44px; /* Минимальный размер для удобного касания */
+    }
+    
+    /* Специальные стили для мобильной клавиатуры */
+    @media (max-height: 700px) {
+        .modal-content {
+            margin: 2% auto;
+            max-height: 96vh;
+        }
+        
+        #orderForm {
+            max-height: 70vh;
+        }
+    }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+    .modal-content {
+        padding: 15px 12px;
+        margin: 2% auto;
+        border-radius: 8px;
+    }
+    
+    .modal-content h3 {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+    
+    .close-modal {
+        right: 15px;
+        top: 10px;
+        font-size: 24px;
+    }
+}
+
+/* Предотвращение перекрытия клавиатурой на мобильных */
+@media (max-width: 768px) {
+    .instruction-modal {
+        align-items: flex-start;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    
+    .modal-content {
+        margin: 20px auto;
+    }
+}
+
+/* Для iOS specifically */
+@supports (-webkit-touch-callout: none) {
+    .modal-content {
+        max-height: 80vh;
+    }
+    
+    #orderForm {
+        max-height: 60vh;
+    }
 }
